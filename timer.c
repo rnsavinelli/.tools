@@ -49,7 +49,7 @@ int
 main (int argc, char *argv[])
 {
     float time;
-
+	
     if (argc == 1) {
         printf("Usage: ./timer n_minutes\n");
     }
@@ -61,9 +61,9 @@ main (int argc, char *argv[])
 
         else {
             printf("Timer configuration: %.2f m\n\n", time/60);
-
+		
             while (time > 0) {
-                if((int) time % 15 == 0) {
+                if((int) time % 10 == 0) {
                     printf("%.2d:%.2d\n", (int) time/60, (int) time % 60);
                 }
                 sleep(1);
@@ -71,7 +71,7 @@ main (int argc, char *argv[])
             }
 
             printf("Time is up!\n");
-
+		
             runcommand(NOTIFICATION);
             runcommand(BELL);
         }
