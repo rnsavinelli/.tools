@@ -37,7 +37,7 @@
 
 #define ERROR -1
 
-#define printhelp() printf("Usage: ./timer [-s|-m|-h] time\n\nTime format options:\n\t-s: seconds\n\t-n: minutes\n\t-h: hours\n")
+#define printhelp() printf("Usage: ./timer [-s|-m|-h] time\n\nTime format options:\n\t-s: seconds\n\t-n: minutes\n\t-h: hours\n\nExample: ./timer -h 2 -m 45 -s 30\n")
 
 void
 runcommand(const char *cmd)
