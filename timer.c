@@ -23,11 +23,21 @@
 
 #include <errno.h>
 #include <stdio.h>
+#include <string.h>
+#include <ctype.h>
 #include <stdlib.h>
 #include <unistd.h>
 
+#define SECONDS 1
+#define MINUTES 60
+#define HOURS   3600
+
 #define NOTIFICATION "notify-send \"Time is up!\" \"Timer countdown finished\""
 #define BELL "paplay /usr/share/sounds/freedesktop/stereo/complete.oga"
+
+#define ERROR -1
+
+#define printhelp() printf("Usage: ./timer [-s|-m|-h] time\n\nTime format options:\n\t-s: seconds\n\t-n: minutes\n\t-h: hours\n")
 
 void
 runcommand(const char *cmd)
@@ -48,30 +58,63 @@ runcommand(const char *cmd)
 int
 main (int argc, char *argv[])
 {
-    float time;
-	
-    if (argc == 1) {
-        printf("Usage: ./timer n_minutes\n");
+    int time = 0;
+    int hours, minutes, seconds;
+    int base;
+
+    if (argc <= 2) {
+        printhelp();
+        return 0;
     }
 
     else {
-        if ((time = atof((const char *) argv[1])*60) <= 0 ) {
-            printf("timer: invalid input\n");
+        for(int i = 1; i < argc; i++) {
+            char* opt = argv[i];
+
+            if(strcmp(opt, "-s") == 0) {
+                base = SECONDS;
+            }
+
+            else if(strcmp(opt, "-m") == 0) {
+                base = MINUTES;
+            }
+
+            else if(strcmp(opt, "-h") == 0) {
+                base = HOURS;
+            }
+
+            else {
+                printhelp();
+                return ERROR;
+            }
+
+            if((i+1) == argc || !isdigit(*argv[i+1])) {
+                printhelp();
+                return ERROR;
+            }
+
+            time += atoi((const char *) argv[++i]) * base;
+        }
+
+        if (time < 0 || time > 24 * HOURS) {
+            printf("Warning: Invalid input.\n");
+            return ERROR;
         }
 
         else {
-            printf("Timer configuration: %.2f m\n\n", time/60);
-		
-            while (time > 0) {
-                if((int) time % 10 == 0) {
-                    printf("%.2d:%.2d\n", (int) time/60, (int) time % 60);
-                }
+            while (time >= 0) {
+                hours = time / 3600;
+                minutes = (time % 3600) / 60;
+                seconds = (time % 3600) % 60;
+
+                printf("\rTime remaining: %02d:%02d:%02d", hours, minutes, seconds);
+                fflush(stdout);
                 sleep(1);
                 time--;
             }
 
-            printf("Time is up!\n");
-		
+            printf("\nTime is up!\n");
+
             runcommand(NOTIFICATION);
             runcommand(BELL);
         }
