@@ -21,6 +21,14 @@
  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  SOFTWARE.
 
+ Solves excercises where the remainder of dividing a big number (expressed as a
+ base and an exponent) by a small one is required.
+
+ Returns the Remainder using either Fermat's Little Theorem or Euler-Fermat's
+ Theorem.
+
+ Takes 3 Mandatory Arguments: number exponent divisor
+ Optional argument verbose, if true, prints the result.
 """
 
 from math import gcd
