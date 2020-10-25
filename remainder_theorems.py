@@ -51,7 +51,8 @@ def via_Fermat_little(a, n, p, verbose = False):
             print("{} is prime\n".format(p))
 
         #if gcd(pow(a, n), p) == 1: # traditional implementation
-        if (a % p != 0) or (p % a != 0): # efficient implementation
+        if gcd(a, p) == 1: # improved implementation
+        #if (a % p != 0) or (p % a != 0): # cuestionable implementation
             if verbose:
                 print("Finding remainder using Fermat's Little Theorem:\n")
 
@@ -88,7 +89,8 @@ def via_Fermat_little(a, n, p, verbose = False):
 
 def via_Euler_Fermat(a, n, p, verbose = False):
     #if gcd(pow(a, n), p) == 1: # traditional implementation
-    if (a % p != 0) or (p % a != 0): # efficient implementation
+    if gcd(a, p) == 1: # improved implementation
+    #if (a % p != 0) or (p % a != 0): # cuestionable implementation
         if verbose:
             print("Finding remainder using Euler-Fermat's Theorem:\n")
 
@@ -96,7 +98,7 @@ def via_Euler_Fermat(a, n, p, verbose = False):
         x = int(n/b)
         y = n - (x * b)
 
-        answer = pow(a, y) % b
+        answer = pow(a, y) % p
 
         if verbose:
             print("\npow({}, phi({})) is congruet to 1 ({})".format(a, p, p))
@@ -110,7 +112,7 @@ def via_Euler_Fermat(a, n, p, verbose = False):
             print("Given pow({}, {}) is congruet to 1 ({}), then".format(a, b, p))
             print("pow({}, {}) ≡  1*pow({}, {}) => pow({}, {}) is congruent to {} ({})\n".format(a, n, a, y, a, y, answer, p))
 
-            print("pow({}, {}) ≡  {}\n".format(a, n, answer))
+            print("pow({}, {}) ≡  {} ({})\n".format(a, n, answer, p))
 
         return answer
 
