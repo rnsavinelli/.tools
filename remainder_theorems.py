@@ -87,7 +87,8 @@ def via_Fermat_little(a, n, p, verbose = False):
         return ERROR
 
 def via_Euler_Fermat(a, n, p, verbose = False):
-    if (a % p != 0) or (p % a != 0):
+    #if gcd(pow(a, n), p) == 1: # traditional implementation
+    if (a % p != 0) or (p % a != 0): # efficient implementation
         if verbose:
             print("Finding remainder using Euler-Fermat's Theorem:\n")
 
