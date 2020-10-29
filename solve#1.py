@@ -46,10 +46,7 @@ def isPrime(n) :
 
 
 def almostEqual(a, b):
-    if abs(a - b) <= EPSILON:
-        return True
-
-    return False
+    return (abs(a - b) <= EPSILON)
 
 def solve():
     # If p = 1 then sqrt(2*p) does not belong to N
