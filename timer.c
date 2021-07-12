@@ -1,6 +1,6 @@
 /* timer.c
  *
- * Copyright (c) 2020 Savinelli Roberto Nicolás <rsavinelli@est.frba.utn.edu.ar>
+ * Copyright (c) 2020 Savinelli Roberto Nicolás <rsavinelli@frba.utn.edu.ar>
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
