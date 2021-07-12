@@ -49,12 +49,12 @@ def almostEqual(a, b):
     return (abs(a - b) <= EPSILON)
 
 def solve():
-    # If p = 1 then sqrt(2*p) does not belong to N
-    p = 3
+    # If p != 1 then sqrt(p) does not belong to N
+    p = 2
 
     while(True):
         if (isPrime(p)):
-            sqrt2p = sqrt(2*p)
+            sqrt2p = sqrt(p)
             x = (sqrt2p - int(sqrt2p))
             print("{}: {}".format(p, x))
 
@@ -65,6 +65,4 @@ def solve():
         p=p+1
 
 if __name__ == '__main__':
-    import sys
-
     solve()
